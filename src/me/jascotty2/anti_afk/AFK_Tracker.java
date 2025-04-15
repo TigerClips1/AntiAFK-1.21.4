@@ -48,7 +48,7 @@ public class AFK_Tracker implements Listener, Runnable {
 
 	protected final void updatePlayerlist() {
 		synchronized (players) {
-			Player[] servPlayers = plugin.getServer().getOnlinePlayers();
+			Player[] servPlayers = plugin.getServer().getOnlinePlayers().toArray(new Player[0]);
 			Map<String, PlayerInfo> copy = new HashMap<String, PlayerInfo>();
 			copy.putAll(players);
 			players.clear();
@@ -87,7 +87,7 @@ public class AFK_Tracker implements Listener, Runnable {
 	@Override
 	public void run() {
 		Settings conf = plugin.getSettings();
-		Player[] servPlayers = plugin.getServer().getOnlinePlayers();
+		Player[] servPlayers = plugin.getServer().getOnlinePlayers().toArray(new Player[0]);
 		synchronized (players) {
 			for (Player p : servPlayers) {
 				if (!conf.kick || (conf.kickOP || !p.isOp())) {
